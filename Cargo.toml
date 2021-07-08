@@ -1,0 +1,53 @@
+# This file is part of ICU4X. For terms of use, please see the file
+# called LICENSE at the top level of the ICU4X source tree
+# (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
+
+[workspace]
+
+members = [
+    "components/datetime",
+    "components/decimal",
+    "components/icu",
+    "components/icu4x",
+    "components/locale_canonicalizer",
+    "components/locid",
+    "components/locid/macros",
+    "components/plurals",
+    "components/uniset",
+    "experimental/bies",
+    "experimental/calendar",
+    "experimental/provider_ppucd",
+    "experimental/segmenter",
+    "experimental/segmenter_lstm",
+    "ffi/capi",
+    "ffi/ecma402",
+    "provider/blob",
+    "provider/cldr",
+    "provider/core",
+    "provider/fs",
+    "provider/testdata",
+    "tools/benchmark/macros",
+    "tools/benchmark/memory",
+    "tools/datagen",
+    "utils/fixed_decimal",
+    "utils/litemap",
+    "utils/pattern",
+    "utils/writeable",
+    "utils/yoke",
+    "utils/zerovec",
+]
+
+# Enable lto for WASM.
+# 2020-10-30: This currently doesn't work in .cargo/config:
+#   error: options `-C embed-bitcode=no` and `-C lto` are incompatible
+[profile.release]
+lto = true
+
+# Enable debug information specifically for memory profiling.
+# https://docs.rs/dhat/0.2.1/dhat/#configuration
+#
+# 2021-01-08: This would be nicer as a named profile, e.g. [profile.memory]
+# https://github.com/rust-lang/cargo/issues/6988
+[profile.bench]
+debug = true
+debug-assertions = false

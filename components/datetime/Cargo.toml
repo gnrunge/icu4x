@@ -1,0 +1,77 @@
+# This file is part of ICU4X. For terms of use, please see the file
+# called LICENSE at the top level of the ICU4X source tree
+# (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
+
+[package]
+name = "icu_datetime"
+description = "API for formatting date and time to user readable textual representation"
+version = "0.2.0"
+authors = ["The ICU4X Project Developers"]
+edition = "2018"
+readme = "README.md"
+repository = "https://github.com/unicode-org/icu4x"
+license-file = "../../LICENSE"
+categories = ["internationalization"]
+# Keep this in sync with other crates unless there are exceptions
+include = [
+    "src/**/*",
+    "examples/**/*",
+    "benches/**/*",
+    "tests/**/*",
+    "Cargo.toml",
+    "README.md"
+]
+
+[package.metadata.cargo-all-features]
+skip_optional_dependencies = true
+
+[package.metadata.docs.rs]
+all-features = true
+
+[dependencies]
+icu_locid = { version = "0.2", path = "../locid" }
+icu_provider = { version = "0.2", path = "../../provider/core" }
+writeable = { version = "0.2", path = "../../utils/writeable" }
+litemap = { version = "0.2", path = "../../utils/litemap", features = ["serde"] }
+tinystr = { version = "0.4.5" }
+serde = { version = "1.0", features = ["derive"], optional = true }
+smallvec = "1.6"
+thiserror = "1.0"
+
+[dev-dependencies]
+criterion = "0.3"
+icu = { path = "../icu", default-features = false }
+icu_benchmark_macros = { version = "0.2", path = "../../tools/benchmark/macros" }
+icu_provider = { version = "0.2", path = "../../provider/core" }
+icu_testdata = { version = "0.2", path = "../../provider/testdata" }
+icu_locid_macros = { version = "0.2", path = "../locid/macros" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bincode = "1.3"
+
+[lib]
+path = "src/lib.rs"
+bench = false  # This option is required for Benchmark CI
+
+[features]
+default = ["provider_serde"]
+bench = []
+provider_serde = ["serde", "litemap/serde"]
+
+[[bench]]
+name = "datetime"
+harness = false
+required-features = ["provider_serde"]
+
+[[bench]]
+name = "pattern"
+harness = false
+required-features = ["bench"]
+
+[[test]]
+name = "datetime"
+required-features = ["provider_serde"]
+
+[[example]]
+name = "work_log"
+required-features = ["provider_serde"]
