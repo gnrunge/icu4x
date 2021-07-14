@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1626292253971,
+  "lastUpdate": 1626292700735,
   "repoUrl": "https://github.com/gnrunge/icu4x",
   "entries": {
     "Benchmark": [
@@ -365,6 +365,120 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/gnrunge/icu4x/commit/41fabf5971895804a7a6dffbd1fc517e6a3958bd"
         },
         "date": 1626292252495,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "unicode_bmp_blocks_selector",
+            "value": 17240,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "code_line_diff",
+            "value": 17978,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "filter_langids",
+            "value": 21739,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "tui",
+            "value": 18124,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "borrowed_pattern",
+            "value": 18901,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "simple",
+            "value": 921557,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "work_log",
+            "value": 18127,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "writeable_message",
+            "value": 13537,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "language_names_hash_map",
+            "value": 12498,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "permyriad",
+            "value": 12554,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "language_names_lite_map",
+            "value": 9312,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "unread_emails",
+            "value": 18124,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "syntatically_canonicalize_locales",
+            "value": 44330,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "elevator_floors",
+            "value": 18124,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "owned_pattern",
+            "value": 22573,
+            "range": "± 0",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "committer": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "distinct": true,
+          "id": "6765f8f987a445aa3854da5c5bfafda346f930af",
+          "message": "Newline was missing.",
+          "timestamp": "2021-07-14T12:52:44-07:00",
+          "tree_id": "22fd992cf155c856af08ee37e40bb6e4d0628bc3",
+          "url": "https://github.com/gnrunge/icu4x/commit/6765f8f987a445aa3854da5c5bfafda346f930af"
+        },
+        "date": 1626292699614,
         "tool": "cargo",
         "benches": [
           {
