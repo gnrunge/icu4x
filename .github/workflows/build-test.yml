@@ -618,7 +618,7 @@ jobs:
         alert-threshold: '100%'
         fail-on-alert: true
         gh-pages-branch:  unmerged-pr-bench-data
-        auto-push: false
+        auto-push: true
         github-token: ${{ secrets.GITHUB_TOKEN }}
         comment-on-alert: true
 
