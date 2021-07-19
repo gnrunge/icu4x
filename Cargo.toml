@@ -25,17 +25,16 @@ members = [
     "provider/cldr",
     "provider/core",
     "provider/fs",
-    "provider/macros",
     "provider/testdata",
     "tools/benchmark/macros",
     "tools/benchmark/memory",
+    "tools/benchmark/binsize",
     "tools/datagen",
     "utils/fixed_decimal",
     "utils/litemap",
     "utils/pattern",
     "utils/writeable",
     "utils/yoke",
-    "utils/yoke/derive",
     "utils/zerovec",
 ]
 
