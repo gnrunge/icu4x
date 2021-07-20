@@ -618,7 +618,7 @@ jobs:
         alert-threshold: '100%'
         fail-on-alert: true
         gh-pages-branch:  unmerged-pr-bench-data
-        auto-push: true
+        auto-push: false
         github-token: ${{ secrets.GITHUB_TOKEN }}
         comment-on-alert: true
 
@@ -641,9 +641,13 @@ jobs:
         alert-comment-cc-users: '@gnrunge,@sffc,@zbraniecki,@echeran,@gregtatum'
 
     - name: Switch branch
+      # Only for PRs that merge into the ICU4X mainline.
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
       run: git checkout unmerged-prpbench-data # gh-pages
 
     - name: Upload binsize with ndjson data
+      # Only for PRs that merge into the ICU4X mainline.
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
       uses: actions/upload-artifact@v2
       with:
         path: ./benchmarks/binsize2/**
