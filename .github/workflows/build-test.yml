@@ -640,8 +640,8 @@ jobs:
         comment-on-alert: true
         alert-comment-cc-users: '@gnrunge,@sffc,@zbraniecki,@echeran,@gregtatum'
 
-    - name: Switch branch to get result of binsize benchmark with ndjson output
-      run: git checkout gh-pages
+    - name: Switch branch
+      run: git checkout unmerged-prpbench-data # gh-pages
 
     - name: Upload binsize with ndjson data
       uses: actions/upload-artifact@v2
