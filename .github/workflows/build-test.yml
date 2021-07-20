@@ -559,9 +559,9 @@ jobs:
           path: ./benchmarks/memory/**
           name: benchmark-memory
 
-  # Binary size benchmark with ndjson output data format
+  # Binary size benchmark: build and size wasm binaries; creates ndjson output data format
 
-  binsize2:
+  binsize:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -571,6 +571,7 @@ jobs:
       run: |
         echo "::set-output name=hash::$(cargo search cargo-make | grep '^cargo-make =' | md5sum)"
       shell: bash
+
     - name: Attempt to load cached cargo-make
       uses: actions/cache@v2
       id: cargo-make-cache
@@ -579,6 +580,7 @@ jobs:
           ~/.cargo/bin/cargo-make
           ~/.cargo/bin/cargo-make.exe
         key: ${{ runner.os }}-${{ steps.cargo-make-version.outputs.hash }}
+
     - name: Install cargo-make
       if: steps.cargo-make-cache.outputs.cache-hit != 'true'
       uses: actions-rs/install@v0.1.2
@@ -596,26 +598,24 @@ jobs:
         cargo install twiggy
 
     - name: Setup output data directory
-      run: mkdir -p benchmarks/binsize2
+      run: mkdir -p benchmarks/binsize
 
     - name: Build wasm executables and measure size
       run: |
         cargo make wasm-examples
-        cargo run --package icu_benchmark_binsize | tee benchmarks/binsize2/output.txt
-        ls -l benchmarks/binsize2
-        cat benchmarks/binsize2/output.txt
+        cargo run --package icu_benchmark_binsize | tee benchmarks/binsize/output.txt
 
     - name: Store benchmark result (non-merge action only)
-      # Data from anything that is not a merge to mainline goes to a preliminary branch.
+      # Data from anything that is not a merge to mainline goes to a preliminary branch
       if: github.event_name != 'push' || github.ref != 'refs/heads/main'
-      # Use gregtatum special feature to process ndjson-formatted benchmark data.
+      # Use gregtatum special feature to process ndjson-formatted benchmark data
       uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
       with:
         tool: 'ndjson'
-        output-file-path: benchmarks/binsize2/output.txt
-        benchmark-data-dir-path: ./benchmarks/binsize2
+        output-file-path: benchmarks/binsize/output.txt
+        benchmark-data-dir-path: ./benchmarks/binsize
         # Tentative setting, optimized value to be determined
-        alert-threshold: '100%'
+        alert-threshold: '200%'
         fail-on-alert: true
         gh-pages-branch:  unmerged-pr-bench-data
         auto-push: false
@@ -625,14 +625,14 @@ jobs:
     - name: Store benchmark result (merge to main only)
       # Only for PRs that merge into the ICU4X mainline.
       if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-      # Use gregtatum special feature to process ndjson-formatted benchmark data.
+      # Use gregtatum special feature to process ndjson-formatted benchmark data
       uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
       with:
         tool: 'ndjson'
-        output-file-path: benchmarks/binsize2/output.txt
-        benchmark-data-dir-path: ./benchmarks/binsize2
+        output-file-path: benchmarks/binsize/output.txt
+        benchmark-data-dir-path: ./benchmarks/binsize
         # Tentative setting, optimized value to be determined
-        alert-threshold: '100%'
+        alert-threshold: '200%'
         fail-on-alert: true
         gh-pages-branch: gh-pages
         auto-push: true
@@ -641,7 +641,7 @@ jobs:
         alert-comment-cc-users: '@gnrunge,@sffc,@zbraniecki,@echeran,@gregtatum'
 
     - name: Switch branch
-      # Only for PRs that merge into the ICU4X mainline.
+      # Only for PRs that merge into the ICU4X mainline
       if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
       run: git checkout unmerged-prpbench-data # gh-pages
 
@@ -650,8 +650,8 @@ jobs:
       if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
       uses: actions/upload-artifact@v2
       with:
-        path: ./benchmarks/binsize2/**
-        name: benchmark-binsize2
+        path: ./benchmarks/binsize/**
+        name: benchmark-binsize
 
   # Doc-GH-Pages job
 
@@ -660,7 +660,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: [check, tidy, benchmark, memory, binsize2]
+    needs: [check, tidy, benchmark, memory, binsize]
 
     ## Only create docs for merges/pushes to main (skip PRs).
     ## Multiple unfinished PRs should not clobber docs from approved code.
@@ -684,7 +684,7 @@ jobs:
       run: mkdir -p copy-to-ext-repo/benchmarks/memory
 
     - name: Create (ensure existence of) folder for binary size benchmark data to copy
-      run: mkdir -p copy-to-ext-repo/benchmarks/binsize2
+      run: mkdir -p copy-to-ext-repo/benchmarks/binsize
 
     # Doc-GH-Pages job > Download benchmark dashboard files from previous jobs into folder of files to copy to remote repo
 
@@ -706,7 +706,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         path: ./copy-to-ext-repo/benchmarks/memory
-        name: benchmark-binsize2
+        name: benchmark-binsize
 
     # Doc-GH-Pages job > Generate `cargo doc` step
 
@@ -760,73 +760,3 @@ jobs:
         publish_branch: gh-pages
         publish_dir: copy-to-ext-repo
         commit_message: Rust API docs + benchmark dashboards -> GH Pages
-
-  # Experimental: binary size benchmark
-
-  binsize:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      
-    - name: Get cargo-make version
-      id: cargo-make-version
-      run: |
-        echo "::set-output name=hash::$(cargo search cargo-make | grep '^cargo-make =' | md5sum)"
-      shell: bash
-    - name: Attempt to load cached cargo-make
-      uses: actions/cache@v2
-      id: cargo-make-cache
-      with:
-        path: |
-          ~/.cargo/bin/cargo-make
-          ~/.cargo/bin/cargo-make.exe
-        key: ${{ runner.os }}-${{ steps.cargo-make-version.outputs.hash }}
-    - name: Install cargo-make
-      if: steps.cargo-make-cache.outputs.cache-hit != 'true'
-      uses: actions-rs/install@v0.1.2
-      with:
-        crate: cargo-make
-        version: latest
-
-    - name: Install prerequisites for wasm build
-      run: |
-        rustup component add rust-src
-        rustup toolchain list
-        rustup toolchain install nightly-2021-02-28
-        sudo npm install -g wasm-opt --unsafe-perm
-        sudo npm install -g wabt
-        cargo install twiggy
-
-    - name: Setup output data directory
-      run: mkdir -p benchmarks/binsize
-
-    - name: Build wasm executables and measure size
-      run: |
-        cargo make wasm-examples
-        cargo run --package icu_benchmark_binsize | tee benchmarks/binsize/output.txt
-        ls -l benchmarks/binsize
-        cat benchmarks/binsize/output.txt
-
-    - name: Store benchmark result
-      uses: rhysd/github-action-benchmark@v1
-      with:
-        tool: 'cargo'
-        output-file-path: benchmarks/binsize/output.txt
-        benchmark-data-dir-path: ./benchmarks/binsize
-        alert-threshold: '100%'
-        fail-on-alert: true
-        gh-pages-branch: gh-pages
-        auto-push: true
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        comment-on-alert: true
-
-    - name: Switch branch to get result of binsize output. Needed?
-      run: git checkout gh-pages
-
-    - name: Upload binsize data
-      uses: actions/upload-artifact@v2
-      with:
-        path: ./benchmarks/binsize/**
-        name: benchmark-binsize
-
-
