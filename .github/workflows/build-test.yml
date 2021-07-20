@@ -816,7 +816,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         comment-on-alert: true
 
-    - name: Switch branch to get result of binsize output.
+    - name: Switch branch to get result of binsize output. Needed?
       run: git checkout gh-pages
 
     - name: Upload binsize data
