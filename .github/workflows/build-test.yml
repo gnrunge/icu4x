@@ -604,6 +604,7 @@ jobs:
       run: |
         cargo make wasm-examples
         cargo run --package icu_benchmark_binsize | tee benchmarks/binsize/output.txt
+        ls -l  benchmarks/binsize/
 
     - name: Store benchmark result (non-merge action only)
       # Data from anything that is not a merge to mainline goes to a preliminary branch
