@@ -677,7 +677,7 @@ jobs:
     - name: Build wasm executables and measure size
       run: |
         # cargo make wasm-examples
-        cargo run --package icu_benchmark_binsize  -- wasmpkg/wasm-opt ${{ matrix.type }} | tee benchmarks/binsize/${{ wasm.type }}/output.txt
+        cargo run --package icu_benchmark_binsize  -- wasmpkg/wasm-opt ${{ matrix.type }} | tee benchmarks/binsize/${{ matrix.type }}/output.txt
         # Now gzip the wasm executables, measure the new size, and put the
         # result in a separate directory.
         #(cd wasmpkg/wasm-opt && gzip *+opt.wasm)
