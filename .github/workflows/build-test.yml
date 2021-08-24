@@ -624,6 +624,10 @@ jobs:
   # Binary size benchmark: build and size wasm binaries; creates ndjson output data format
 
   binsize:
+    strategy:
+      fail-fast: false
+      matrix:
+        type: [wasm, gz]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -661,18 +665,24 @@ jobs:
 
     - name: Setup output data directories
       run: |
-        mkdir -p benchmarks/binsize
-        mkdir -p benchmarks/binsize/gzip
+        mkdir -p benchmarks/binsize/${{ matrix.type }}
+
+    - name: Build wasm executables
+      run: make wasm-examples
+
+    - name: gzip wasm executables if requested
+      if: ${{ matrix.type == 'gz' }}
+      run: (cd wasmpkg/wasm-opt && gzip *+opt.wasm)
 
     - name: Build wasm executables and measure size
       run: |
-        cargo make wasm-examples
-        cargo run --package icu_benchmark_binsize  -- wasmpkg/wasm-opt wasm | tee benchmarks/binsize/output.txt
+        # cargo make wasm-examples
+        cargo run --package icu_benchmark_binsize  -- wasmpkg/wasm-opt ${{ matrix.type }} | tee benchmarks/binsize/${{ wasm.type }}/output.txt
         # Now gzip the wasm executables, measure the new size, and put the
         # result in a separate directory.
-        (cd wasmpkg/wasm-opt && gzip *+opt.wasm)
-        cargo run --package icu_benchmark_binsize -- wasmpkg/wasm-opt gz | tee benchmarks/binsize/gzip/compressed.txt
-        ls -l benchmarks/binsize/gzip
+        #(cd wasmpkg/wasm-opt && gzip *+opt.wasm)
+        #cargo run --package icu_benchmark_binsize -- wasmpkg/wasm-opt gz | tee benchmarks/binsize/gzip/compressed.txt
+        ls -l benchmarks/binsize/*
 
     - name: Store benchmark result (non-merge action only)
       # Data from anything that is not a merge to mainline goes to a preliminary branch
@@ -681,7 +691,7 @@ jobs:
       uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
       with:
         tool: 'ndjson'
-        output-file-path: benchmarks/binsize/gzip/compressed.txt
+        output-file-path: benchmarks/binsize/${{ matrix.type }}/output.txt
         benchmark-data-dir-path: ./benchmarks/binsize
         # Tentative setting, optimized value to be determined
         alert-threshold: '200%'
