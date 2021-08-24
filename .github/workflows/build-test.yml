@@ -681,23 +681,6 @@ jobs:
       uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
       with:
         tool: 'ndjson'
-        output-file-path: benchmarks/binsize/output.txt
-        benchmark-data-dir-path: ./benchmarks/binsize
-        # Tentative setting, optimized value to be determined
-        alert-threshold: '200%'
-        fail-on-alert: true
-        gh-pages-branch:  unmerged-pr-bench-data
-        auto-push: false
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        comment-on-alert: true
-
-    - name: Store benchmark result (non-merge action only)
-      # Data from anything that is not a merge to mainline goes to a preliminary branch
-      if: github.event_name != 'push' || github.ref != 'refs/heads/main'
-      # Use gregtatum special feature to process ndjson-formatted benchmark data
-      uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
-      with:
-        tool: 'ndjson'
         output-file-path: benchmarks/binsize/gzip/compressed.txt
         benchmark-data-dir-path: ./benchmarks/binsize
         # Tentative setting, optimized value to be determined
