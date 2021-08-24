@@ -13,11 +13,7 @@ name: Build and Test
 # Clippy is special because we're using actions-rs/clippy-check which is able to surface clippy failures on
 # PR bodies
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: '*'
+on: [push]
 
 jobs:
 
@@ -663,13 +659,20 @@ jobs:
         sudo npm install -g wabt
         cargo install twiggy
 
-    - name: Setup output data directory
-      run: mkdir -p benchmarks/binsize
+    - name: Setup output data directories
+      run: |
+        mkdir -p benchmarks/binsize
+        mkdir -p benchmarks/binsize/gzip
 
     - name: Build wasm executables and measure size
       run: |
         cargo make wasm-examples
-        cargo run --package icu_benchmark_binsize  -- wasmpkg/wasm-opt| tee benchmarks/binsize/output.txt
+        cargo run --package icu_benchmark_binsize  -- wasmpkg/wasm-opt wasm | tee benchmarks/binsize/output.txt
+        # Now gzip the wasm executables, measure the new size, and put the
+        # result in a separate directory.
+        (cd wasmpkg/wasm-opt gzip *+opt.wasm)
+        cargo run --package icu_benchmark_binsize -- wasmpkg/wasm-opt gz | tee benchmarks/binsize/gzip/compressed.txt
+        ls -l benchmarks/binsize/gzip
 
     - name: Store benchmark result (non-merge action only)
       # Data from anything that is not a merge to mainline goes to a preliminary branch
