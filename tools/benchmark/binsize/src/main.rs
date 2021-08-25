@@ -22,7 +22,7 @@ fn wasm_filesize(dir: &str, filesuffix: &str) -> Result<u64, std::io::Error> {
                 println!(
                     // Write the file name and size in bytes to stdout in ndjson format.
                     "{{\"biggerIsBetter\":false,\"name\":{:?},\"unit\":\"bytes\",\"value\":{}}}",
-                    p.file_stem().unwrap(),
+                    p.file_name().unwrap(),
                     p.metadata()?.len()
                 );
             }
