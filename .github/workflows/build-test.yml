@@ -663,7 +663,7 @@ jobs:
         sudo npm install -g wabt
         cargo install twiggy
 
-    - name: Setup output data directories
+    - name: Setup output data directory
       run: |
         mkdir -p benchmarks/binsize/${{ matrix.type }}
 
@@ -674,14 +674,9 @@ jobs:
       if: ${{ matrix.type == 'gz' }}
       run: (cd wasmpkg/wasm-opt && gzip *+opt.wasm)
 
-    - name: Build wasm executables and measure size
+    - name: Measure size of executables (gzip'd executables 
       run: |
-        # cargo make wasm-examples
         cargo run --package icu_benchmark_binsize  -- wasmpkg/wasm-opt ${{ matrix.type }} | tee benchmarks/binsize/${{ matrix.type }}/output.txt
-        # Now gzip the wasm executables, measure the new size, and put the
-        # result in a separate directory.
-        #(cd wasmpkg/wasm-opt && gzip *+opt.wasm)
-        #cargo run --package icu_benchmark_binsize -- wasmpkg/wasm-opt gz | tee benchmarks/binsize/gzip/compressed.txt
         ls -l benchmarks/binsize/*
 
     - name: Store benchmark result (non-merge action only)
@@ -708,8 +703,8 @@ jobs:
       uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
       with:
         tool: 'ndjson'
-        output-file-path: benchmarks/binsize/output.txt
-        benchmark-data-dir-path: ./benchmarks/binsize
+        output-file-path: benchmarks/binsize/${{ matrix.type }}/output.txt
+        benchmark-data-dir-path: ./benchmarks/binsize${{ matrix.type }}
         # Tentative setting, optimized value to be determined
         alert-threshold: '200%'
         fail-on-alert: true
