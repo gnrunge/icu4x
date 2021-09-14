@@ -820,6 +820,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
+
     - name: Setup output data directory
       run: |
         mkdir -p benchmarks/binsize/datasize
