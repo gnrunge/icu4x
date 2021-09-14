@@ -15,7 +15,6 @@ use std::env;
 use std::fs;
 use std::process;
 
-
 fn wasm_filesize(dir: &str, filesuffix: &str) -> Result<u64, std::io::Error> {
     let paths = fs::read_dir(dir).expect("Directory with wasm binaries not found!");
     let mut count: u64 = 0;
@@ -55,7 +54,7 @@ fn any_file_size(filepath: &str) -> Result<bool, std::io::Error> {
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 3 {
-        eprintln!("Usage: cargo run --package icu_benchmark_binsize -- <WASM BINARY DIRECTORY> <SUFFIX: wasm | gz>");
+        eprintln!("Usage: cargo run --package icu_benchmark_binsize -- <PATH> <wasm | gz | file>");
         process::exit(1);
     }
     let path = &args[1];
