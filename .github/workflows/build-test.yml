@@ -833,7 +833,7 @@ jobs:
 
     - name: Store benchmark result (non-merge action only)
       # Data from anything that is not a merge to mainline goes to a preliminary branch
-      # if: github.event_name != 'push' || github.ref != 'refs/heads/main'
+      if: github.event_name != 'push' || github.ref != 'refs/heads/main'
       # Use gregtatum special feature to process ndjson-formatted benchmark data
       uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
       with:
@@ -844,7 +844,7 @@ jobs:
         alert-threshold: '100%'
         fail-on-alert: true
         gh-pages-branch:  unmerged-pr-bench-data
-        auto-push: false
+        auto-push: true
         github-token: ${{ secrets.GITHUB_TOKEN }}
         comment-on-alert: true
 
