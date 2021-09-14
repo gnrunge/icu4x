@@ -44,7 +44,10 @@ fn any_file_size(filepath: &str) -> Result<bool, std::io::Error> {
             "{{\"biggerIsBetter\":false,\"name\":{:?},\"unit\":\"bytes\",\"value\":{}}}",
             filepath, fsize
         );
-        println!( "{{\"biggerIsBetter\":false,\"name\":{:?},\"unit\":\"bytes\",\"value\":{}}}", filepath, fsize);
+        println!(
+            "{{\"biggerIsBetter\":false,\"name\":{:?},\"unit\":\"bytes\",\"value\":{}}}",
+            filepath, fsize
+        );
     }
     Ok(exists)
 }
