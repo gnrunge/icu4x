@@ -40,6 +40,10 @@ fn any_file_size(filepath: &str) -> Result<bool, std::io::Error> {
     let exists: bool = std::path::Path::new(filepath).exists();
     if exists {
         let fsize = fs::metadata(filepath)?.len();
+        println!(
+            "{{\"biggerIsBetter\":false,\"name\":{:?},\"unit\":\"bytes\",\"value\":{}}}",
+            filepath, fsize
+        );
         println!( "{{\"biggerIsBetter\":false,\"name\":{:?},\"unit\":\"bytes\",\"value\":{}}}", filepath, fsize);
     }
     Ok(exists)
