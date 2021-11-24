@@ -13,11 +13,13 @@ name: Build and Test
 # Clippy is special because we're using actions-rs/clippy-check which is able to surface clippy failures on
 # PR bodies
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: '*'
+on: [push]
+
+#on:
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: '*'
 
 jobs:
 
