@@ -757,10 +757,11 @@ jobs:
         args: --git https://github.com/rustwasm/twiggy.git --rev ${{ steps.twiggy-version.outputs.hash }} twiggy
 
     - name: Install npm from cache
+      uses: actions/checkout@v2
       uses: actions/setup-node@v2
       with:
         cache: 'npm'
-    - run: sudo npm install
+    - run: sudo npm install 
 
     - name: Install prerequisites for wasm build
       run: |
