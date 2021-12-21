@@ -762,9 +762,9 @@ jobs:
         node-version: '14'
         cache: 'npm'
     - run: |
-        sudo npm install -g wasm-opt --unsafe-perm
+        sudo npm install -g wasm-opt --unsafe-perm --package-lock
         ls -l
-        sudo npm install -g wabt
+        sudo npm install -g wabt --package-lock
         ls -l
 
     - name: Install prerequisites for wasm build
