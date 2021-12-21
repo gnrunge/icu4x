@@ -763,7 +763,9 @@ jobs:
         cache: 'npm'
     - run: |
         sudo npm install -g wasm-opt --unsafe-perm
+        ls -l
         sudo npm install -g wabt
+        ls -l
 
     - name: Install prerequisites for wasm build
       run: |
