@@ -761,7 +761,7 @@ jobs:
       with:
         node-version: '14'
         cache: 'npm'
-    - run: sudo npm install 
+    - run: sudo npm install -g wasm-opt --unsafe-perm
 
     - name: Install prerequisites for wasm build
       run: |
@@ -769,7 +769,7 @@ jobs:
         rustup toolchain list
         rustup toolchain install nightly-2021-09-22
         # sudo npm install -g wasm-opt --unsafe-perm
-        sudo npm install -g wabt
+        # sudo npm install -g wabt
 
     - name: Setup output data directory
       run: |
