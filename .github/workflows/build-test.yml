@@ -761,7 +761,9 @@ jobs:
       with:
         node-version: '14'
         cache: 'npm'
-    - run: sudo npm install -g wasm-opt --unsafe-perm
+    - run: |
+        sudo npm install -g wasm-opt --unsafe-perm
+        sudo npm install -g wabt
 
     - name: Install prerequisites for wasm build
       run: |
