@@ -779,14 +779,18 @@ jobs:
         mkdir npm-wabt
         cd npm-wabt
         npm install wabt
+        ls -l node_modules/wabt/bin
         echo "$HOME/npm-wabt/node_modules/wabt/bin" >> $GITHUB_PATH
+        echo "$PATH"
 
     - name: Setup output data directory
       run: |
         mkdir -p benchmarks/binsize/${{ matrix.type }}
 
     - name: Build wasm executables
-      run: cargo make wasm-examples
+      run: |
+        echo "$PATH"
+        cargo make wasm-examples
 
     - name: gzip wasm executables if requested
       if: ${{ matrix.type == 'gz' }}
