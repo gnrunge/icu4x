@@ -776,8 +776,10 @@ jobs:
         cd npm-wasm-opt
         npm install wasm-opt
         echo "$HOME/npm-wasm-opt/node_modules/wasm-opt/bin" >> $GITHUB_PATH
+        cd
         mkdir npm-wabt
         cd npm-wabt
+        pwd
         npm install wabt
         ls -l
         echo "$HOME/npm-wabt/node_modules/wabt/bin" >> $GITHUB_PATH
