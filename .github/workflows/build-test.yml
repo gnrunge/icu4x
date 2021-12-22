@@ -779,7 +779,7 @@ jobs:
         mkdir npm-wabt
         cd npm-wabt
         npm install wabt
-        echo "$HOME/npm-wabt/node_modules/wabt/bin
+        echo "$HOME/npm-wabt/node_modules/wabt/bin" >> $GITHUB_PATH
 
     - name: Setup output data directory
       run: |
