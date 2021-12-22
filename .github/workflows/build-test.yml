@@ -756,24 +756,24 @@ jobs:
         command: install
         args: --git https://github.com/rustwasm/twiggy.git --rev ${{ steps.twiggy-version.outputs.hash }} twiggy
 
-    - name: Install npm from cache
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-        cache: 'npm'
-    - run: |
-        sudo npm install -g wasm-opt --unsafe-perm --package-lock
-        ls -l
-        sudo npm install -g wabt --package-lock
-        ls -l
+    #- name: Install npm from cache
+    #  uses: actions/setup-node@v2
+    #  with:
+    #    node-version: '14'
+    #    cache: 'npm'
+    #- run: |
+    #    sudo npm install -g wasm-opt --unsafe-perm --package-lock
+    #    ls -l
+    #    sudo npm install -g wabt --package-lock
+    #    ls -l
 
     - name: Install prerequisites for wasm build
       run: |
         rustup component add rust-src
         rustup toolchain list
         rustup toolchain install nightly-2021-09-22
-        # sudo npm install -g wasm-opt --unsafe-perm
-        # sudo npm install -g wabt
+        sudo npm install -g wasm-opt --unsafe-perm
+        sudo npm install -g wabt
 
     - name: Setup output data directory
       run: |
