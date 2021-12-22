@@ -772,6 +772,7 @@ jobs:
         rustup component add rust-src
         rustup toolchain list
         rustup toolchain install nightly-2021-09-22
+        cd
         mkdir npm-wasm-opt
         cd npm-wasm-opt
         npm install wasm-opt
