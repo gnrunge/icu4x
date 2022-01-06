@@ -756,16 +756,19 @@ jobs:
         command: install
         args: --git https://github.com/rustwasm/twiggy.git --rev ${{ steps.twiggy-version.outputs.hash }} twiggy
 
-    #- name: Install npm from cache
-    #  uses: actions/setup-node@v2
-    #  with:
-    #    node-version: '14'
-    #    cache: 'npm'
-    #- run: |
-    #    sudo npm install -g wasm-opt --unsafe-perm --package-lock
-    #    ls -l
-    #    sudo npm install -g wabt --package-lock
-    #    ls -l
+    - name: Install npm from cache
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+        cache: 'npm'
+    - run: |
+        npm install wasm-opt
+        # npm install wabt
+        ls -l
+        #sudo npm install -g wasm-opt --unsafe-perm --package-lock
+        #ls -l
+        #sudo npm install -g wabt --package-lock
+        #ls -l
 
     - name: Install prerequisites for wasm build
       run: |
