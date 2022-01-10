@@ -777,9 +777,11 @@ jobs:
         rustup toolchain install nightly-2021-09-22
         cd ffi/diplomat/wasm
         pwd
-        npm install
+        npm ci
         ls -l node_modules
         ls -l node_modules/wasm-opt/bin
+        ls -l node_modules/wabt/bin
+        echo "$HOME/ffi/diplomat/wasm/node_modules/wasm-opt/bin"
         echo "$HOME/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> GITHUB_PATH
         echo "$HOME/ffi/diplomat/wasm/node_modules/wabt/bin" >> GITHUB_PATH
         echo $PATH
