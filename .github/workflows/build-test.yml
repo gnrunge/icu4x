@@ -772,6 +772,7 @@ jobs:
 
     - name: Install prerequisites for wasm build
       run: |
+        pwd
         rustup component add rust-src
         rustup toolchain list
         rustup toolchain install nightly-2021-09-22
