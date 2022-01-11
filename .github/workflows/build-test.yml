@@ -788,6 +788,7 @@ jobs:
         cd npm-wasm-opt
         npm install wasm-opt
         pwd
+        ls -l
         ls -l "$HOME/npm-wasm-opt/node_modules/wasm-opt/bin"
         echo "$HOME/npm-wasm-opt/node_modules/wasm-opt/bin" >> $GITHUB_PATH
         cd
