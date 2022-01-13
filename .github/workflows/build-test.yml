@@ -10,14 +10,15 @@ name: Build and Test
 # jobs, maps to a `ci-job-foo` entry in Makefile.toml. If adding further CI jobs, please add them
 # as makefile targets as well, and list them under `ci-all`.
 #
-# Clippy is special because we're using actions-rs/clippy-check which is able to surface clippy failures on
+# Clippy is special because we're using actions-rs/clippy-check which is able tow surface clippy failures on
 # PR bodies
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: '*'
+on: [push]
+
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: '*'
 
 jobs:
 
