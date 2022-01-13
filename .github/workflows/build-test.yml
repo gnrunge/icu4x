@@ -776,6 +776,8 @@ jobs:
     - name: Measure size of executables
       run: |
         cargo run --package icu_benchmark_binsize  -- wasmpkg/wasm-opt ${{ matrix.type }} | tee benchmarks/binsize/${{ matrix.type }}/output.txt
+        ls -l benchmarks/binsize/${{ matrix.type }}/output.txt
+        cat benchmarks/binsize/${{ matrix.type }}/output.txt
 
     - name: Store benchmark result (non-merge action only)
       # Data from anything that is not a merge to mainline goes to a preliminary branch
