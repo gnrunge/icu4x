@@ -714,6 +714,7 @@ jobs:
     - name: Get cargo-make version
       id: cargo-make-version
       run: |
+        pwd
         echo "::set-output name=hash::$(cargo search cargo-make | grep '^cargo-make =' | md5sum)"
       shell: bash
 
@@ -736,6 +737,7 @@ jobs:
     - name: Get twiggy version
       id: twiggy-version
       run: |
+        pwd
         # We install a specific version since we need https://github.com/rustwasm/twiggy/pull/576 and
         # twiggy has not been updated yet. Switch this back to a regular cargo install when twiggy is updated.
         echo "::set-output name=hash::92d59f439821cd6514a88e807dd6576bfece6244"
@@ -755,20 +757,63 @@ jobs:
         command: install
         args: --git https://github.com/rustwasm/twiggy.git --rev ${{ steps.twiggy-version.outputs.hash }} twiggy
 
+    #- name: Install npm from cache
+    #  uses: actions/setup-node@v2
+    #  with:
+    #    node-version: '14'
+    #    cache: 'npm'
+    #- run: |
+    #    npm install wasm-opt
+        # npm install wabt
+    #    ls -l
+        #sudo npm install -g wasm-opt --unsafe-perm --package-lock
+        #ls -l
+        #sudo npm install -g wabt --package-lock
+        #ls -l
+
     - name: Install prerequisites for wasm build
       run: |
+        pwd
         rustup component add rust-src
         rustup toolchain list
         rustup toolchain install nightly-2021-12-22
-        sudo npm install -g wasm-opt --unsafe-perm
-        sudo npm install -g wabt
+        cd ffi/diplomat/wasm
+        pwd
+        npm ci
+        ls -l node_modules/wasm-opt/bin
+        ls -l node_modules/wabt/bin
+        ls -l  "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin"
+        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin"
+        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
+        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
+        echo $PATH
+        #pwd
+        #cd
+        #pwd
+        #mkdir npm-wasm-opt
+        #cd npm-wasm-opt
+        #npm install wasm-opt
+        #pwd
+        #ls -l
+        #ls -l "$HOME/npm-wasm-opt/node_modules/wasm-opt/bin"
+        #echo "$HOME/npm-wasm-opt/node_modules/wasm-opt/bin" >> $GITHUB_PATH
+        #cd
+        #mkdir npm-wabt
+        #cd npm-wabt
+        #pwd
+        #npm install wabt
+        #ls -l
+        #echo "$HOME/npm-wabt/node_modules/wabt/bin" >> $GITHUB_PATH
+        #echo "$PATH"
 
     - name: Setup output data directory
       run: |
         mkdir -p benchmarks/binsize/${{ matrix.type }}
 
     - name: Build wasm executables
-      run: cargo make wasm-examples
+      run: |
+        echo "$PATH"
+        cargo make wasm-examples
 
     - name: gzip wasm executables if requested
       if: ${{ matrix.type == 'gz' }}
