@@ -767,9 +767,6 @@ jobs:
       with:
         path: ffi/diplomat/wasm/node_modules
         key: npm-${{ hashFiles('ffi/diplomat/wasm/package-lock.json') }}
-      run: |
-        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
-        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
 
     - name: Install npm packages.
       # If npm dependencies are not found in cache. Required for this step are
@@ -788,10 +785,9 @@ jobs:
         rustup toolchain install nightly-2021-12-22
         ls -l ffi/diplomat/wasm
         ls -l ffi/diplomat/wasm/node_modules
-        #cd ffi/diplomat/wasm
-        #npm ci
-        #echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
-        #echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
+        # Also, set path to wasm-opt and wabt packages.
+        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
+        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
 
     - name: Setup output data directory
       run: |
