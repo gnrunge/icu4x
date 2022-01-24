@@ -783,6 +783,8 @@ jobs:
         rustup component add rust-src
         rustup toolchain list
         rustup toolchain install nightly-2021-12-22
+        ls -l ffi/diplomat/wasm
+        ls -l ffi/diplomat/wasm/node_modules
         #cd ffi/diplomat/wasm
         #npm ci
         #echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
