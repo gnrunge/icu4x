@@ -767,6 +767,9 @@ jobs:
       with:
         path: ffi/diplomat/wasm/node_modules
         key: npm-${{ hashFiles('ffi/diplomat/wasm/package-lock.json') }}
+      run: |
+        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
+        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
 
     - name: Install npm packages.
       # If npm dependencies are not found in cache. Required for this step are
