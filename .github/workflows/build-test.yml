@@ -805,6 +805,7 @@ jobs:
 
     - name: Set path to wasm-opt and wabt binaries
       run: |
+        pwd
         echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
         echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
 
