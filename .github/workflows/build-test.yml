@@ -256,6 +256,7 @@ jobs:
           npm ci
       - name: Set path to wasm-opt and wabt binaries
         run: |
+          pwd
           echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
           echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
 
@@ -267,8 +268,8 @@ jobs:
       #    # 'sudo npm install -g wabt'.
       #    cd ffi/diplomat/wasm
       #    npm ci
-      #    echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
-      #    echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
+      #    echo "$PWD/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
+      #    echo "$PWD/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
       - name: Get twiggy version
         id: twiggy-version
         run: |
@@ -799,23 +800,24 @@ jobs:
     - name: Install npm packages.
       # If npm dependencies are not found in cache.
       if: steps.npm-cache.outputs.cache-hit != 'true'
+      # Note: if package.json and package-lock.json are out of sync then
+      # 'npm ci' will fail. Locally execute 'npm install' in directory
+      # 'ffi/diplomat/wasm' to generate a new package-lock.json file and
+      # merge it into the repository.
       run: |
         cd ffi/diplomat/wasm
         npm ci
 
     - name: Set path to wasm-opt and wabt binaries
       run: |
-        pwd
-        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
-        echo "$HOME/work/icu4x/icu4x/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
+        echo "$PWD/ffi/diplomat/wasm/node_modules/wasm-opt/bin" >> $GITHUB_PATH
+        echo "$PWD/ffi/diplomat/wasm/node_modules/wabt/bin" >> $GITHUB_PATH
 
     - name: Install prerequisites for wasm build
       run: |
         rustup component add rust-src
         rustup toolchain list
         rustup toolchain install nightly-2021-12-22
-        ls -l ffi/diplomat/wasm
-        ls -l ffi/diplomat/wasm/node_modules
 
     - name: Setup output data directory
       run: |
