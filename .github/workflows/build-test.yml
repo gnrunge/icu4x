@@ -786,7 +786,7 @@ jobs:
 
     - name: Install npm packages.
       # If npm dependencies are not found in cache.
-      if: steps.npm-cache.outputs.cache-hit != 'true'
+      # if: steps.npm-cache.outputs.cache-hit != 'true'
       # Note: if package.json and package-lock.json are out of sync then
       # 'npm ci' will fail. Locally execute 'npm install' in directory
       # 'ffi/diplomat/wasm' to generate a new package-lock.json file and
@@ -794,7 +794,7 @@ jobs:
       run: |
         cd ffi/diplomat/wasm
         npm ci
-        if $?
+        if !$?
         then
           echo Execution of 'npm ci' failed. This may be due to package.json
           echo and package-lock,json being out of sync. Locally execute
