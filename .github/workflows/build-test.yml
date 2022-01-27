@@ -785,7 +785,7 @@ jobs:
         key: npm-${{ hashFiles('ffi/diplomat/wasm/package-lock.json') }}
 
     - name: Install npm packages.
-      If npm dependencies are not found in cache.
+      # If npm dependencies are not found in cache.
       # if: steps.npm-cache.outputs.cache-hit != 'true'
       # Note: if package.json and package-lock.json are out of sync then
       # 'npm ci' will fail. Locally execute 'npm install' in directory
