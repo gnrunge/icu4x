@@ -794,7 +794,7 @@ jobs:
       run: |
         cd ffi/diplomat/wasm
         npm ci
-        #ls -l abcxyz
+        ls -l abcxyz
         if [ $? -gt 0 ]
         then
           echo Execution of npm ci failed. This may be due to package.json
