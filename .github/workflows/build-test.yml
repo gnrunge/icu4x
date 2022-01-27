@@ -794,8 +794,7 @@ jobs:
       run: |
         cd ffi/diplomat/wasm
         npm ci
-        ls -l abcxyz
-        if [ $? -gt 0 ]
+        if [ ls -l abcxyz ]
         then
           echo Execution of npm ci failed. This may be due to package.json
           echo and package-lock,json being out of sync. Locally execute
