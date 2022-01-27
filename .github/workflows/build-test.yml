@@ -795,7 +795,7 @@ jobs:
         cd ffi/diplomat/wasm
         npm ci
         retval=$?
-        if [ $retval -eq 0 ]
+        if [ $retval -ne 0 ]
         then
           echo Execution of npm ci failed. This may be due to package.json
           echo and package-lock,json being out of sync. Locally execute
