@@ -840,7 +840,7 @@ jobs:
         output-file-path: benchmarks/binsize/${{ matrix.type }}/output.txt
         benchmark-data-dir-path: ./benchmarks/binsize/${{ matrix.type }}
         # Tentative setting, optimized value to be determined
-        alert-threshold: '200%'
+        alert-threshold: '200000%'
         fail-on-alert: true
         gh-pages-branch:  unmerged-pr-bench-data
         auto-push: false
