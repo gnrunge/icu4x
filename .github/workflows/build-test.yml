@@ -13,11 +13,10 @@ name: Build and Test
 # Clippy is special because we're using actions-rs/clippy-check which is able to surface clippy failures on
 # PR bodies
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: '*'
+on: [push]
+  #  branches: [ main ]
+  #pull_request:
+  #  branches: '*'
 
 jobs:
 
@@ -994,7 +993,7 @@ jobs:
     - name: Switch to benchmark data storage branch.
       run: |
         git fetch
-        git checkout
+        git checkout gh-pages
 
     # TODO(#234) re-include cache steps, also using Rust version in cache key
 
