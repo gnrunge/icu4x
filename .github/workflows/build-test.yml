@@ -586,6 +586,7 @@ jobs:
         with:
           path: ./benchmarks/perf/**  # use wildcard pattern to preserve dir structure of uploaded files
           name: benchmark-perf
+          retention-days: 1
 
   # Run examples with dhat-rs in order to collect memory heap size metrics. These
   # metrics will then be charted over time. See tools/benchmark/memory/README.md for
@@ -721,6 +722,7 @@ jobs:
           # Use wildcard pattern to preserve dir structure of uploaded files:
           path: ./benchmarks/memory/**
           name: benchmark-memory
+          retention-days: 1
 
   # Binary size benchmark: build and size wasm binaries; creates ndjson output data format
 
@@ -876,6 +878,7 @@ jobs:
       with:
         path: ./benchmarks/binsize/**
         name: benchmark-binsize
+        retention-days: 1
 
   # Data size benchmark: track size of provider/testdata/data/testdata.postcard (total data size).
 
@@ -939,6 +942,7 @@ jobs:
       with:
         path: ./benchmarks/datasize/**
         name: benchmark-datasize
+        retention-days: 1
 
   # Docs job
 
@@ -966,6 +970,7 @@ jobs:
       with:
         path: target/doc/**
         name: doc
+        retention-days: 1
 
   # Doc-GH-Pages job
 
@@ -986,49 +991,59 @@ jobs:
     - name: Load the default Rust toolchain via the rust-toolchain file.
       run: rustup show
 
+    - name: Switch to benchmark data storage branch.
+      run: |
+        git fetch
+        git checkout
+
     # TODO(#234) re-include cache steps, also using Rust version in cache key
 
-    - name: Create (ensure existence of) folder suitable for copying to external repo
-      run: mkdir -p copy-to-ext-repo
+    #- name: Create (ensure existence of) folder suitable for copying to external repo
+    #  run: mkdir -p copy-to-ext-repo
 
-    - name: Create (ensure existence of) folder for benchmark data to copy
-      run: mkdir -p copy-to-ext-repo/benchmarks/perf
+    #- name: Create (ensure existence of) folder for benchmark data to copy
+    #  run: mkdir -p copy-to-ext-repo/benchmarks/perf
 
-    - name: Create (ensure existence of) folder for memory benchmark data to copy
-      run: mkdir -p copy-to-ext-repo/benchmarks/memory
+    #- name: Create (ensure existence of) folder for memory benchmark data to copy
+    #  run: mkdir -p copy-to-ext-repo/benchmarks/memory
 
-    - name: Create (ensure existence of) folder for binary size benchmark data to copy
-      run: mkdir -p copy-to-ext-repo/benchmarks/binsize
-
-    # Doc-GH-Pages job > Download benchmark dashboard files from previous jobs into folder of files to copy to remote repo
-
-    - name: Download previous content destined for GH pages
-      uses: actions/download-artifact@v2
-      with:
-        path: ./copy-to-ext-repo/benchmarks/perf
-        name: benchmark-perf
+    #- name: Create (ensure existence of) folder for binary size benchmark data to copy
+    #  run: mkdir -p copy-to-ext-repo/benchmarks/binsize
 
     # Doc-GH-Pages job > Download benchmark dashboard files from previous jobs into folder of files to copy to remote repo
-    - name: Download previous content destined for GH pages
-      uses: actions/download-artifact@v2
-      with:
-        path: ./copy-to-ext-repo/benchmarks/memory
-        name: benchmark-memory
+
+    #- name: Download previous content destined for GH pages
+    #  uses: actions/download-artifact@v2
+    #  with:
+    #    path: ./copy-to-ext-repo/benchmarks/perf
+    #    name: benchmark-perf
 
     # Doc-GH-Pages job > Download benchmark dashboard files from previous jobs into folder of files to copy to remote repo
-    - name: Download previous content destined for GH pages
-      uses: actions/download-artifact@v2
-      with:
-        path: ./copy-to-ext-repo/benchmarks/binsize
-        name: benchmark-binsize
+    #- name: Download previous content destined for GH pages
+    #  uses: actions/download-artifact@v2
+    #  with:
+    #    path: ./copy-to-ext-repo/benchmarks/memory
+    #    name: benchmark-memory
+
+    # Doc-GH-Pages job > Download benchmark dashboard files from previous jobs into folder of files to copy to remote repo
+    #- name: Download previous content destined for GH pages
+    #  uses: actions/download-artifact@v2
+    #  with:
+    #    path: ./copy-to-ext-repo/benchmarks/binsize
+    #    name: benchmark-binsize
 
     # Doc-GH-Pages job > Download docs files from previous jobs into folder of files to copy to remote repo
     - name: Download previous content destined for GH pages
       uses: actions/download-artifact@v2
       with:
-        path: ./copy-to-ext-repo/doc
+        path: doc
         name: doc
 
+    - name: See where we stand and what we have
+      run: |
+        pwd
+        ls -l
+        
     # Doc-GH-Pages job > Generate placeholder root index.html to redirect to `icu4x` crate
 
     - name: Create doc /index.html
@@ -1064,7 +1079,7 @@ jobs:
         # target repo where the Github Pages will be copied to.
         # https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        external_repository: unicode-org/icu4x-docs
+        external_repository: gnrunge/icu4x-perf
         publish_branch: gh-pages
-        publish_dir: copy-to-ext-repo
-        commit_message: Rust API docs + benchmark dashboards -> GH Pages
+        publish_dir: ./
+        commit_message: Benchmark dashboards -> GH Pages
