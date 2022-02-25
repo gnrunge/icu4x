@@ -682,7 +682,7 @@ jobs:
           benchmark-data-dir-path: ./benchmarks/memory/${{ matrix.os }}
           output-file-path: ./benchmarks/memory/${{ matrix.os }}/output.ndjson
           alert-threshold: '200%'
-          fail-on-alert: true
+          fail-on-alert: false # true
           # The historical run information will be stored in this branch. This is the same
           # branch that is being used by the performance benchmark. The information is
           # computed by gregtatum/github-action-benchmark, and is added to a .js file in
@@ -828,7 +828,7 @@ jobs:
         benchmark-data-dir-path: ./benchmarks/binsize/${{ matrix.type }}
         # Tentative setting, optimized value to be determined
         alert-threshold: '200%'
-        fail-on-alert: true
+        fail-on-alert: false # true
         gh-pages-branch: gh-pages
         auto-push: true
         github-token: ${{ secrets.GITHUB_TOKEN }}
