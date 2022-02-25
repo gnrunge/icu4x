@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1645818930890,
+  "lastUpdate": 1645823585664,
   "repoUrl": "https://github.com/gnrunge/icu4x",
   "entries": {
     "Benchmark": [
@@ -53,6 +53,36 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/gnrunge/icu4x/commit/341f0d3d8cf4607dc8f3084ada0396607a0d07b9"
         },
         "date": 1645818927811,
+        "tool": "ndjson",
+        "benches": [
+          {
+            "name": "provider/testdata/data/testdata.postcard",
+            "value": 1672368,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "committer": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "distinct": true,
+          "id": "8d518709289f4e0c7db8240264f9bcd6bc15ff7f",
+          "message": "Remove commented-out parts, more testing.",
+          "timestamp": "2022-02-25T13:10:57-08:00",
+          "tree_id": "8527bd045d571f8cec5b0f456cca0811fc890be7",
+          "url": "https://github.com/gnrunge/icu4x/commit/8d518709289f4e0c7db8240264f9bcd6bc15ff7f"
+        },
+        "date": 1645823582541,
         "tool": "ndjson",
         "benches": [
           {
