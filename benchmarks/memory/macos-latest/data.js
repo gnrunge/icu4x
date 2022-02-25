@@ -1,6 +1,6 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1630011991505,
-  "repoUrl": "https://github.com/unicode-org/icu4x",
+  "lastUpdate": 1645824623454,
+  "repoUrl": "https://github.com/gnrunge/icu4x",
   "entries": {
     "Heap – macos-latest": [
       {
@@ -44182,6 +44182,192 @@ window.BENCHMARK_DATA = {
           {
             "name": "writeable/writeable_message – Heap at End of Program Execution",
             "value": 0,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "litemap/language_names_lite_map – Total Heap Allocations",
+            "value": 448,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "litemap/language_names_lite_map – Heap at Global Memory Max",
+            "value": 256,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "litemap/language_names_lite_map – Heap at End of Program Execution",
+            "value": 0,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "committer": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "distinct": true,
+          "id": "8d518709289f4e0c7db8240264f9bcd6bc15ff7f",
+          "message": "Remove commented-out parts, more testing.",
+          "timestamp": "2022-02-25T13:10:57-08:00",
+          "tree_id": "8527bd045d571f8cec5b0f456cca0811fc890be7",
+          "url": "https://github.com/gnrunge/icu4x/commit/8d518709289f4e0c7db8240264f9bcd6bc15ff7f"
+        },
+        "date": 1645824620368,
+        "tool": "ndjson",
+        "benches": [
+          {
+            "name": "icu_datetime/work_log – Total Heap Allocations",
+            "value": 1551,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_datetime/work_log – Heap at Global Memory Max",
+            "value": 1255,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_datetime/work_log – Heap at End of Program Execution",
+            "value": 1024,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_locid/syntatically_canonicalize_locales – Total Heap Allocations",
+            "value": 514,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_locid/syntatically_canonicalize_locales – Heap at Global Memory Max",
+            "value": 305,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_locid/syntatically_canonicalize_locales – Heap at End of Program Execution",
+            "value": 0,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_locid/filter_langids – Total Heap Allocations",
+            "value": 295,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_locid/filter_langids – Heap at Global Memory Max",
+            "value": 214,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_locid/filter_langids – Heap at End of Program Execution",
+            "value": 0,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_plurals/unread_emails – Total Heap Allocations",
+            "value": 2,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_plurals/unread_emails – Heap at Global Memory Max",
+            "value": 2,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_plurals/unread_emails – Heap at End of Program Execution",
+            "value": 0,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_plurals/elevator_floors – Total Heap Allocations",
+            "value": 2,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_plurals/elevator_floors – Heap at Global Memory Max",
+            "value": 2,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_plurals/elevator_floors – Heap at End of Program Execution",
+            "value": 0,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_uniset/unicode_bmp_blocks_selector – Total Heap Allocations",
+            "value": 1008,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_uniset/unicode_bmp_blocks_selector – Heap at Global Memory Max",
+            "value": 388,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "icu_uniset/unicode_bmp_blocks_selector – Heap at End of Program Execution",
+            "value": 0,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "fixed_decimal/permyriad – Total Heap Allocations",
+            "value": 15,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "fixed_decimal/permyriad – Heap at Global Memory Max",
+            "value": 15,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "fixed_decimal/permyriad – Heap at End of Program Execution",
+            "value": 0,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "writeable/writeable_message – Total Heap Allocations",
+            "value": 1240,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "writeable/writeable_message – Heap at Global Memory Max",
+            "value": 1040,
+            "unit": "bytes",
+            "biggerIsBetter": false
+          },
+          {
+            "name": "writeable/writeable_message – Heap at End of Program Execution",
+            "value": 1024,
             "unit": "bytes",
             "biggerIsBetter": false
           },
