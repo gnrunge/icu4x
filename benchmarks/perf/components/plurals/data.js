@@ -1,6 +1,6 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1630011642335,
-  "repoUrl": "https://github.com/unicode-org/icu4x",
+  "lastUpdate": 1645824095849,
+  "repoUrl": "https://github.com/gnrunge/icu4x",
   "entries": {
     "Rust Benchmark": [
       {
@@ -13061,6 +13061,48 @@ window.BENCHMARK_DATA = {
             "name": "plurals/pluralrules/overview",
             "value": 17991,
             "range": "± 135",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "committer": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "distinct": true,
+          "id": "8d518709289f4e0c7db8240264f9bcd6bc15ff7f",
+          "message": "Remove commented-out parts, more testing.",
+          "timestamp": "2022-02-25T13:10:57-08:00",
+          "tree_id": "8527bd045d571f8cec5b0f456cca0811fc890be7",
+          "url": "https://github.com/gnrunge/icu4x/commit/8d518709289f4e0c7db8240264f9bcd6bc15ff7f"
+        },
+        "date": 1645824092693,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "plurals/operands/overview",
+            "value": 997,
+            "range": "± 0",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "plurals/parser/overview",
+            "value": 5400,
+            "range": "± 10",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "plurals/pluralrules/overview",
+            "value": 15142,
+            "range": "± 65",
             "unit": "ns/iter"
           }
         ]
