@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1645824114162,
+  "lastUpdate": 1645825334390,
   "repoUrl": "https://github.com/gnrunge/icu4x",
   "entries": {
     "Rust Benchmark": [
@@ -6773,6 +6773,48 @@ window.BENCHMARK_DATA = {
             "name": "datetime/zoned_datetime_overview",
             "value": 223991,
             "range": "± 7522",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "committer": {
+            "email": "nrunge@google.com",
+            "name": "gnrunge",
+            "username": "gnrunge"
+          },
+          "distinct": true,
+          "id": "0639bbf0c72c886c38e3f881021592ed2023beae",
+          "message": "Debug 2",
+          "timestamp": "2022-02-25T13:33:15-08:00",
+          "tree_id": "85e4f56c0530b4559fd44920ae6437d285186917",
+          "url": "https://github.com/gnrunge/icu4x/commit/0639bbf0c72c886c38e3f881021592ed2023beae"
+        },
+        "date": 1645825331313,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "datetime/datetime_lengths",
+            "value": 73640,
+            "range": "± 1453",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datetime/datetime_components",
+            "value": 760925,
+            "range": "± 2886",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "datetime/zoned_datetime_overview",
+            "value": 172290,
+            "range": "± 1630",
             "unit": "ns/iter"
           }
         ]
