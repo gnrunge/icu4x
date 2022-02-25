@@ -575,17 +575,17 @@ jobs:
 
       # Benchmarking & dashboards job > Upload output dashboard HTML to "persist" the files across jobs within the same workflow.
 
-      - name: Switch branch to get result of benchmark pages output (merge to main only)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-        run: git checkout gh-pages
+      #- name: Switch branch to get result of benchmark pages output (merge to main only)
+      #  if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+      #  run: git checkout gh-pages
 
-      - name: Upload updated benchmark data (merge to main only)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-        uses: actions/upload-artifact@v2
-        with:
-          path: ./benchmarks/perf/**  # use wildcard pattern to preserve dir structure of uploaded files
-          name: benchmark-perf
-          retention-days: 1
+      #- name: Upload updated benchmark data (merge to main only)
+      #  if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    path: ./benchmarks/perf/**  # use wildcard pattern to preserve dir structure of uploaded files
+      #    name: benchmark-perf
+      #    retention-days: 1
 
   # Run examples with dhat-rs in order to collect memory heap size metrics. These
   # metrics will then be charted over time. See tools/benchmark/memory/README.md for
@@ -710,18 +710,18 @@ jobs:
       # Benchmarking & dashboards job > Upload output dashboard HTML to "persist" the
       # files across jobs within the same workflow.
 
-      - name: Switch branch to get result of benchmark pages output (merge to main only)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-        run: git checkout gh-pages
+      #- name: Switch branch to get result of benchmark pages output (merge to main only)
+      #  if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+      #  run: git checkout gh-pages
 
-      - name: Upload updated benchmark data (merge to main only)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-        uses: actions/upload-artifact@v2
-        with:
+      #- name: Upload updated benchmark data (merge to main only)
+      #  if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+      #  uses: actions/upload-artifact@v2
+      #  with:
           # Use wildcard pattern to preserve dir structure of uploaded files:
-          path: ./benchmarks/memory/**
-          name: benchmark-memory
-          retention-days: 1
+      #    path: ./benchmarks/memory/**
+      #    name: benchmark-memory
+      #    retention-days: 1
 
   # Binary size benchmark: build and size wasm binaries; creates ndjson output data format
 
@@ -849,7 +849,7 @@ jobs:
 
     - name: Store benchmark result (merge to main only)
       # Only for PRs that merge into the ICU4X mainline.
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+      #if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
       # Use gregtatum special feature to process ndjson-formatted benchmark data
       uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
       with:
@@ -865,19 +865,19 @@ jobs:
         comment-on-alert: true
         alert-comment-cc-users: '@gnrunge,@sffc,@zbraniecki,@echeran,@gregtatum'
 
-    - name: Switch to branch gh-pages for benchmark data storage (merge to main only)
+    #- name: Switch to branch gh-pages for benchmark data storage (merge to main only)
       # Only for PRs that merge into the ICU4X mainline
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-      run: git checkout gh-pages
+    #  if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+    #  run: git checkout gh-pages
 
-    - name: Upload binsize with benchmark data in ndjson format (merge to main only)
+    #- name: Upload binsize with benchmark data in ndjson format (merge to main only)
       # Only for PRs that merge into the ICU4X mainline.
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-      uses: actions/upload-artifact@v2
-      with:
-        path: ./benchmarks/binsize/**
-        name: benchmark-binsize
-        retention-days: 1
+    #  if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    path: ./benchmarks/binsize/**
+    #    name: benchmark-binsize
+    #    retention-days: 1
 
   # Data size benchmark: track size of provider/testdata/data/testdata.postcard (total data size).
 
@@ -913,7 +913,7 @@ jobs:
 
     - name: Store benchmark result (merge to main only)
       # Only for PRs that merge into the ICU4X mainline.
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+      #if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
       # Use gregtatum special feature to process ndjson-formatted benchmark data
       uses: gregtatum/github-action-benchmark@d3f06f738e9612988d575db23fae5ca0008d3d12
       with:
@@ -929,19 +929,19 @@ jobs:
         comment-on-alert: true
         alert-comment-cc-users: '@gnrunge,@sffc,@zbraniecki,@echeran,@gregtatum'
 
-    - name: Switch to branch gh-pages for benchmark data storage (merge to main only)
+    #- name: Switch to branch gh-pages for benchmark data storage (merge to main only)
       # Only for PRs that merge into the ICU4X mainline
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-      run: git checkout gh-pages
+    #  if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+    #  run: git checkout gh-pages
 
-    - name: Upload datasize with benchmark data in ndjson format (merge to main only)
+    #- name: Upload datasize with benchmark data in ndjson format (merge to main only)
       # Only for PRs that merge into the ICU4X mainline.
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
-      uses: actions/upload-artifact@v2
-      with:
-        path: ./benchmarks/datasize/**
-        name: benchmark-datasize
-        retention-days: 1
+    #  if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'unicode-org/icu4x'
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    path: ./benchmarks/datasize/**
+    #    name: benchmark-datasize
+    #    retention-days: 1
 
   # Docs job
 
@@ -1047,8 +1047,7 @@ jobs:
 
     - name: Create doc /index.html
       run: |
-        mkdir -p copy-to-ext-repo
-        cat > copy-to-ext-repo/index.html <<EOL
+        cat > index.html <<EOL
         <!doctype html>
         <html>
           <head>
